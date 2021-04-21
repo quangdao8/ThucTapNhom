@@ -782,7 +782,7 @@ go
 
 
 ---------------------thong ke nhung doc gia muon sach------------------------
-create proc tkmuon
+create proc tkdocgiadangmuon
 as
 begin
 select maDG as [Mã ĐG], tenDG as [Tên ĐG], gioiTinh as [Giới tính], ngaySinh as [Ngày sinh], diaChi as [Địa chỉ], SDT as [SĐT]
@@ -792,7 +792,7 @@ end
 go
 ---------------------thong ke doc gia khong tra sach dung han
 
-create proc tkvipham
+create proc tkdocgiamuonquahan
 as
 begin
 select DocGia.maDG as [Mã ĐG], tenDG as [Tên ĐG], gioiTinh as [Giới tính], ngaySinh as [Ngày sinh], diaChi as [Địa chỉ], SDT as [SĐT],soPMT as[Số Phiếu Mượn Trả]
@@ -812,18 +812,18 @@ group by TuaSach.maTS,tenTS
 end
 go
 
----thong ke sach duoc muon tttron ngay
-create proc tkmuontrongngay(@date date)
+---thong ke sach duoc muon trong ngay
+create proc tksachmuontrongngay(@date date)
 as
 begin
 	declare @tb table([Ngày] date,[Số Lượng Sách Được Mượn] int)
-	if(@date='')
-	insert into @tb
-	select ngayLap,count (ChiTietMuon.soPMT)
-	from PhieuMuonTra,ChiTietMuon
-	where PhieuMuonTra.soPMT=ChiTietMuon.soPMT
-	group by ngayLap
-	else
+	--if(@date='')
+	--insert into @tb
+	--select ngayLap,count (ChiTietMuon.soPMT)
+	--from PhieuMuonTra,ChiTietMuon
+	--where PhieuMuonTra.soPMT=ChiTietMuon.soPMT
+	--group by ngayLap
+	--else
 	insert into @tb
 	select ngayLap,count (ChiTietMuon.soPMT)
 	from PhieuMuonTra,ChiTietMuon
@@ -832,4 +832,5 @@ begin
 
 	select *from @tb
 end
+
 go

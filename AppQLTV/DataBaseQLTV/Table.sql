@@ -4,6 +4,16 @@ go
 use QuanLyThuVien
 go
 
+
+create table Account(
+	Users nvarchar(20) primary key not null,
+	pass nvarchar(20) not null
+)
+insert into Account values ('admin', '12345');
+
+insert into Account values ('ducanh', '11111');
+
+
 create table DocGia(
 	maDG char(10) not null,
 	tenDG nvarchar(30) not null,
